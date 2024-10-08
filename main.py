@@ -1,22 +1,8 @@
 from gspread import Client,service_account
 from telethon.sync import TelegramClient
 import telebot
-
-
-# если будем заливать на сервер нужно ли им передавать эти значения?????
-# ссылка на таблицу
-table_url = 'https://docs.google.com/spreadsheets/d/1uFFEKYenW5AkWCie_-q1Kuz2HoXWgvxZzfbuLVBFf58/edit?hl=ru&gid=0#gid=0'
-
-# api и hash для google cloud account
-api_google_sheets_id = 20890311
-api_google_sheets_hash = "b9b9cd80c19acdf5dd436287101bf3ae"
-
-# токен бота
-bot_token = '7018907071:AAGKPnomDCkLSx2YEwAImK40oyBHvI2xc8I' 
-
-# id канала, у которого будем проверять подписку
-channel_id = -1002207564334 # id канала Placa
-
+import os 
+from dotenv import load_dotenv
 
 # создаём клиента для работы с Google Sheets
 def client_init_json() -> Client:
@@ -28,6 +14,21 @@ def get_table_by_url(client: Client, table_url):
 
 
 def main():
+    load_dotenv()
+    # если будем заливать на сервер нужно ли им передавать эти значения?????
+    # ссылка на таблицу
+    table_url = os.getenv('table_url')
+
+    # api и hash для google cloud account
+    api_google_sheets_id = os.getenv("api_google_sheets_id")
+    api_google_sheets_hash = os.getenv("api_google_sheets_hash")
+
+    # токен бота
+    bot_token = os.getenv("bot_token")
+
+    # id канала, у которого будем проверять подписку
+    channel_id = os.getenv("channel_id") # id канала Placa
+
     # Создаем клиента и открываем нашу таблицу DB v0
     client = client_init_json()
     spreadsheet = get_table_by_url(client, table_url)
