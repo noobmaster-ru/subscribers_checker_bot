@@ -20,8 +20,8 @@ def main():
     table_url = os.getenv('table_url')
 
     # api и hash для google cloud account
-    api_google_sheets_id = os.getenv("api_google_sheets_id")
-    api_google_sheets_hash = os.getenv("api_google_sheets_hash")
+    api_telegram_id = os.getenv("api_telegram_id")
+    api_telegram_hash = os.getenv("api_telegram_hash")
 
     # токен бота
     bot_token = os.getenv("bot_token")
@@ -50,7 +50,7 @@ def main():
 
     # список id всех клиентов
     clients_ids_list = []
-    bot = TelegramClient('bot', api_google_sheets_id, api_google_sheets_hash).start(bot_token=bot_token)
+    bot = TelegramClient('bot', api_telegram_id, api_telegram_hash).start(bot_token=bot_token)
 
     # добавляем в список все id
     with bot:
